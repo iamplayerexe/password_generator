@@ -1,0 +1,237 @@
+/* =========================================
+ * Components & Form Elements
+ * =========================================
+ */
+.top-controls {
+    position: absolute;
+    top: 1.5rem;
+    right: 1.5rem;
+    display: flex;
+    gap: 0.5rem;
+    z-index: 10;
+}
+.control-button {
+    width: 40px;
+    height: 40px;
+    padding: 0;
+    position: relative;
+    border-radius: 10px;
+    border: none;
+    background: var(--bg-primary);
+    color: var(--text-primary);
+    box-shadow: var(--shadow-sm);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.2s ease-in-out;
+}
+.control-button:hover {
+    transform: translateY(-2px);
+    background: var(--bg-secondary);
+}
+.control-button .icon {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    transition: opacity 0.3s ease, color 0.3s ease;
+}
+#theme-toggle .icon { color: var(--theme-icon-color); }
+
+#theme-toggle .sun-icon { opacity: 0; }
+#theme-toggle .moon-icon { opacity: 1; }
+body.light-mode #theme-toggle .sun-icon { opacity: 1; }
+body.light-mode #theme-toggle .moon-icon { opacity: 0; }
+
+.form-group { margin-bottom: 1.5rem; }
+.options-group {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 1.5rem;
+}
+.options-group label {
+    margin-bottom: 0;
+    margin-left: 0.5rem;
+}
+
+label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: 600;
+}
+input[type="text"],
+input[type="password"] {
+    width: 100%;
+    padding: 0.75rem;
+    border: none;
+    background: var(--bg-primary);
+    color: var(--text-primary);
+    border-radius: 8px;
+    font-size: 1em;
+    height: 44px;
+    box-shadow: var(--shadow-inset);
+}
+.primary-button, .secondary-button {
+    width: 100%;
+    padding: 0.8rem;
+    border: none;
+    border-radius: 8px;
+    font-size: 1em;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.2s ease-in-out;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.secondary-button {
+    background: var(--copy-btn-bg);
+    color: var(--text-primary);
+    border: 1px solid var(--border-color);
+    box-shadow: var(--shadow-sm);
+}
+.secondary-button:hover {
+    transform: translateY(-2px);
+    background: var(--copy-btn-hover);
+}
+
+/*
+ * UPDATED: Added generic background, color, and hover styles
+ * to the primary-button class.
+ */
+.primary-button {
+    background: var(--generate-btn-bg);
+    color: var(--generate-btn-text);
+    box-shadow: var(--shadow-sm);
+    border: 1px solid var(--border-color);
+}
+.primary-button:hover {
+    background: var(--generate-btn-hover-bg);
+    transform: translateY(-2px);
+}
+
+/* Generate Button Style (now inherits from .primary-button) */
+#generate-btn {
+    font-size: 1.1em;
+    padding: 1rem;
+}
+
+.result-group {
+    position: relative;
+    margin-top: 1.5rem;
+}
+
+.error-text {
+    color: var(--error-text-color);
+    text-align: center;
+    font-size: 0.85em;
+    margin-top: 0.75rem;
+    height: 1.2em;
+}
+
+/* Saved Password Item Styling & Generator Output*/
+.password-item {
+    background: var(--bg-primary);
+    border-radius: 8px;
+    padding: 1rem;
+    margin-bottom: 1rem;
+    box-shadow: var(--shadow-sm);
+}
+.password-item-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 0.5rem;
+}
+.password-item-name {
+    font-weight: bold;
+    word-break: break-all;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+}
+.password-item-username {
+    font-size: 0.85em;
+    color: var(--text-secondary);
+    margin-bottom: 1rem;
+    word-break: break-all;
+}
+
+.password-value-container {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: var(--bg-secondary);
+    box-shadow: var(--shadow-inset);
+    padding: 0.5rem 0.75rem;
+    border-radius: 6px;
+    margin-bottom: 1rem;
+}
+.password-item-value,
+#password-output {
+    font-family: monospace;
+    word-break: break-all;
+    flex-grow: 1;
+}
+
+/* --- UPDATED: New style to make readonly input blend in --- */
+#password-output {
+    background: transparent;
+    border: none;
+    box-shadow: none;
+    padding: 0;
+    height: auto;
+    color: var(--text-primary);
+    font-size: 1em;
+}
+#password-output::placeholder {
+    color: var(--text-secondary);
+    opacity: 0.7;
+}
+
+.password-item-actions {
+    display: flex;
+    gap: 0.5rem;
+    justify-content: flex-end;
+    margin-top: 1rem;
+}
+.action-btn {
+    background: var(--copy-btn-bg);
+    color: var(--text-primary);
+    border: 1px solid var(--border-color);
+    border-radius: 6px;
+    padding: 0.4rem 0.8rem;
+    cursor: pointer;
+    transition: all 0.2s ease-in-out;
+    font-size: 0.8em;
+    line-height: 1.2;
+    flex-shrink: 0;
+}
+.action-btn:hover {
+    background-color: var(--copy-btn-hover);
+    transform: translateY(-2px);
+}
+.delete-btn { background-color: #5c2c2c; }
+.delete-btn:hover { background-color: #e74c3c; }
+
+/* Light mode delete button */
+body.light-mode .delete-btn {
+    background-color: #fce8e6;
+    color: #c0392b;
+    border-color: #c0392b;
+}
+body.light-mode .delete-btn:hover {
+    background-color: #e74c3c;
+    color: #fff;
+}
+
+
+/* NEW: Style for the vault locked message */
+.no-passwords-message {
+    text-align: center;
+    color: var(--vault-locked-text-color);
+    padding: 2rem;
+    font-style: italic;
+}
