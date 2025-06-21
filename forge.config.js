@@ -19,7 +19,6 @@ module.exports = {
 
   makers: [
     {
-      // Windows installer
       name: '@electron-forge/maker-squirrel',
       config: {
         name: "PasswordGenerator",
@@ -27,7 +26,6 @@ module.exports = {
       },
     },
     {
-      // macOS DMG installer
       name: '@electron-forge/maker-dmg',
       config: {
         icon: 'src/assets/password-generator-logo.icns',
@@ -35,11 +33,9 @@ module.exports = {
       }
     },
     {
-      // Generic ZIP for fallback (no platform specified)
       name: '@electron-forge/maker-zip',
     },
     {
-      // Linux .deb installer
       name: '@electron-forge/maker-deb',
       config: {
           options: {
@@ -52,7 +48,6 @@ module.exports = {
       },
     },
     {
-      // Linux .rpm installer
       name: '@electron-forge/maker-rpm',
       config: {
           options: {
@@ -86,10 +81,12 @@ module.exports = {
     {
       name: '@electron-forge/publisher-github',
       config: {
+        // This now points to your PRIVATE repository for releases
         repository: {
           owner: 'iamplayerexe',
-          name: 'password_generator'
+          name: 'password_generator_app'
         },
+        // The token will be provided by the workflow environment
         authToken: process.env.GITHUB_TOKEN,
         prerelease: false,
         draft: false
