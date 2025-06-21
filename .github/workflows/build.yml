@@ -18,7 +18,7 @@ jobs:
     runs-on: ${{ matrix.os }}
 
     env:
-      # Use the PAT secret you created, not the default token
+      # Use the PAT secret you created
       GITHUB_TOKEN: ${{ secrets.PAT }}
 
     steps:
@@ -43,7 +43,8 @@ jobs:
       - name: Build and Publish
         shell: bash
         run: |
-          if [ "${{ runner.os }}" == "Linux" ];
+          # The 'then' keyword is added to fix the syntax error
+          if [ "${{ runner.os }}" == "Linux" ]; then
             xvfb-run --auto-servernum npx electron-forge publish
           else
             npx electron-forge publish
