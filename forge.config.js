@@ -19,6 +19,7 @@ module.exports = {
 
   makers: [
     {
+      // Windows installer
       name: '@electron-forge/maker-squirrel',
       config: {
         name: "PasswordGenerator",
@@ -26,10 +27,19 @@ module.exports = {
       },
     },
     {
-      name: '@electron-forge/maker-zip',
-      platforms: ['darwin'],
+      // macOS DMG installer
+      name: '@electron-forge/maker-dmg',
+      config: {
+        icon: 'src/assets/password-generator-logo.icns',
+        name: 'PasswordGenerator'
+      }
     },
     {
+      // Generic ZIP for fallback (no platform specified)
+      name: '@electron-forge/maker-zip',
+    },
+    {
+      // Linux .deb installer
       name: '@electron-forge/maker-deb',
       config: {
           options: {
@@ -42,6 +52,7 @@ module.exports = {
       },
     },
     {
+      // Linux .rpm installer
       name: '@electron-forge/maker-rpm',
       config: {
           options: {
