@@ -1,3 +1,4 @@
+// forge.config.js
 require('dotenv').config();
 
 const { FusesPlugin } = require('@electron-forge/plugin-fuses');
@@ -18,47 +19,25 @@ module.exports = {
   rebuildConfig: {},
 
   makers: [
-    {
-      name: '@electron-forge/maker-squirrel',
-      config: {
-        name: "PasswordGenerator",
-        setupIcon: 'src/assets/password-generator-logo.ico',
-      },
-    },
-    {
-      name: '@electron-forge/maker-dmg',
-      config: {
-        icon: 'src/assets/password-generator-logo.icns',
-        name: 'PasswordGenerator'
-      }
-    },
+    // Create a zip for Windows containing the .exe and support files
     {
       name: '@electron-forge/maker-zip',
+      platforms: ['win32'],
     },
+    // Create a DMG for macOS
     {
-      name: '@electron-forge/maker-deb',
+      name: '@electron-forge/maker-dmg',
+      platforms: ['darwin'],
       config: {
-          options: {
-              maintainer: 'Xutron',
-              homepage: 'https://github.com/iamplayerexe/password_generator',
-              icon: 'src/assets/password-generator-logo.png',
-              productName: 'PasswordGenerator',
-              license: 'MIT'
-          }
-      },
+        name: 'PasswordGenerator',
+        icon: 'src/assets/password-generator-logo.icns'
+      }
     },
+    // Create a zip for Linux
     {
-      name: '@electron-forge/maker-rpm',
-      config: {
-          options: {
-              maintainer: 'Xutron',
-              homepage: 'https://github.com/iamplayerexe/password_generator',
-              icon: 'src/assets/password-generator-logo.png',
-              productName: 'PasswordGenerator',
-              license: 'MIT'
-          }
-      },
-    },
+      name: '@electron-forge/maker-zip',
+      platforms: ['linux'],
+    }
   ],
 
   plugins: [
@@ -76,21 +55,4 @@ module.exports = {
       [FuseV1Options.OnlyLoadAppFromAsar]: true,
     }),
   ],
-
-  publishers: [
-    {
-      name: '@electron-forge/publisher-github',
-      config: {
-        // This now points to your PRIVATE repository for releases
-        repository: {
-          owner: 'iamplayerexe',
-          name: 'password_generator_app'
-        },
-        // The token will be provided by the workflow environment
-        authToken: process.env.GITHUB_TOKEN,
-        prerelease: false,
-        draft: false
-      }
-    }
-  ]
 };
