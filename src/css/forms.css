@@ -1,0 +1,54 @@
+/* src/css/forms.css */
+.pg-form-group {
+    margin-bottom: 1rem;
+}
+
+.pg-form-group label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: 600;
+    font-size: 0.875rem;
+}
+
+input[type="text"], input[type="password"] {
+    width: 100%;
+    padding: 0.65rem 0.75rem;
+    border: 1px solid var(--border-color);
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    border-radius: 6px;
+    font-size: 1rem;
+    transition: border-color 0.2s, box-shadow 0.2s;
+    box-sizing: border-box;
+}
+
+input[type="text"]:focus, input[type="password"]:focus {
+    border-color: var(--accent-color);
+    box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.3);
+    outline: none;
+}
+
+.pg-result-group {
+    margin-top: 1rem;
+}
+
+.pg-password-output-container {
+    display: flex;
+    gap: 0.5rem;
+}
+
+#password-output {
+    background-color: var(--card-bg-color);
+    flex-grow: 1; /* Take up remaining space */
+}
+
+.pg-options-group {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-bottom: 1.5rem;
+    margin-top: 0.5rem;
+}
+.pg-options-group label {
+    margin-bottom: 0;
+}

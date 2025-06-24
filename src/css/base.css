@@ -1,101 +1,45 @@
-/*
- * =========================================
- * Basic Reset and Body Setup
- * =========================================
- */
-* {
+/* src/css/base.css */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap');
+
+:root {
+    --bg-color: #f9fafb;
+    --text-color: #111827;
+    --card-bg-color: #ffffff;
+    --shadow-color: rgba(0, 0, 0, 0.05);
+    --border-color: #e5e7eb;
+    --subtitle-color: #6b7280;
+    --accent-color: #4f46e5;
+    --success-color: #10b981;
+    --danger-color: #ef4444;
+    /* MODIFIED: Added purple text color variable */
+    --purple-text-color: #8b5cf6;
+    --sun-color: #f59e0b;
+}
+
+html[data-theme="dark"] {
+    --bg-color: #111827;
+    --text-color: #f9fafb;
+    --card-bg-color: #1f2937;
+    --shadow-color: rgba(0, 0, 0, 0.25);
+    --border-color: #374151;
+    --subtitle-color: #9ca3af;
+    --purple-text-color: #a78bfa;
+}
+
+html, body {
+    font-family: 'Inter', -apple-system, sans-serif;
+    background-color: var(--bg-color);
+    color: var(--text-color);
     margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-
-html {
-    background: #1e1e1e;
-}
-
-body {
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-    background-color: var(--bg-primary);
-    color: var(--text-primary);
+    transition: background-color 0.2s ease;
+    user-select: none;
+    overflow: hidden;
+    height: 100vh;
     display: flex;
     flex-direction: column;
-    height: 100vh;
-    padding-top: 32px;
-    transition: background-color 0.3s ease, border-radius 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
-    overflow: hidden;
 }
 
-/* --- NEW: Custom Focus Outline --- */
 *:focus-visible {
-    outline: 2px solid var(--accent-primary);
+    outline: 2px solid var(--accent-color);
     outline-offset: 2px;
-    box-shadow: 0 0 0 4px var(--focus-ring-color);
-    border-radius: 4px;
-}
-
-/*
- * =========================================
- * Custom Title Bar
- * =========================================
- */
-.title-bar {
-    background: var(--title-bar-bg);
-    color: var(--title-bar-text);
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    height: 32px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 0 0 0 10px; /* CHANGED: No right padding */
-    user-select: none;
-    -webkit-app-region: drag;
-    border-bottom: 1px solid var(--border-color);
-    z-index: 100;
-    transition: box-shadow 0.3s ease;
-}
-
-.title-bar-controls,
-.title-bar-text {
-    display: flex;
-    align-items: center;
-    height: 100%;
-}
-
-.title-bar-controls {
-    -webkit-app-region: no-drag;
-}
-
-.title-bar-text {
-    font-size: 0.8em;
-    margin-left: 5px;
-}
-
-.app-version-text {
-    color: var(--text-secondary);
-    margin-left: 8px;
-}
-
-.title-bar-button {
-    width: 45px;
-    height: 100%;
-    border: none;
-    background: transparent;
-    color: var(--title-bar-text);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-    transition: background-color 0.2s;
-}
-
-.title-bar-button:hover {
-    background: rgba(128, 128, 128, 0.2);
-}
-
-.title-bar-button.close-button:hover {
-    background: #e81123;
-    color: #fff;
 }

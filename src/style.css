@@ -1,6 +1,11 @@
-@import url("css/variables.css");
+/* src/style.css */
 @import url("css/base.css");
 @import url("css/layout.css");
-@import url("css/components.css");
+@import url("css/title.css");
+@import url("css/title-bar.css");
+@import url("css/loading-screen.css");
+@import url("css/forms.css");
+@import url("css/buttons.css");
+@import url("css/vault.css");
+/* MODIFIED: Added the import for modal styles */
 @import url("css/modals.css");
-

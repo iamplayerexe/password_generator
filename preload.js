@@ -1,3 +1,4 @@
+// preload.js
 const { contextBridge, ipcRenderer } = require('electron');
 
 contextBridge.exposeInMainWorld('api', {
@@ -9,6 +10,7 @@ contextBridge.exposeInMainWorld('api', {
     close: () => ipcRenderer.send('window-close'),
   },
   getAppVersion: () => ipcRenderer.invoke('get-app-version'),
+  // MODIFIED: This listener is now exposed
   onWindowStateChange: (callback) => ipcRenderer.on('window-state-changed', (_event, isMaximized) => callback(isMaximized)),
   
   // --- Secure Vault API ---
@@ -20,7 +22,7 @@ contextBridge.exposeInMainWorld('api', {
   getSavedPasswords: () => ipcRenderer.invoke('vault-get-passwords'),
   savePassword: (passwordData) => ipcRenderer.invoke('vault-save-password', passwordData),
   deletePassword: (id) => ipcRenderer.invoke('vault-delete-password', id),
-  deletePasswords: (ids) => ipcRenderer.invoke('vault-delete-passwords', ids), // FIXED: This line was missing
+  deletePasswords: (ids) => ipcRenderer.invoke('vault-delete-passwords', ids),
 
   // --- Export/Import/PDF API ---
   exportPasswords: (passwords, password) => ipcRenderer.invoke('export-passwords', { passwords, password }),

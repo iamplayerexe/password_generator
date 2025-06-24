@@ -1,0 +1,37 @@
+/* src/css/title.css */
+.main-title {
+    font-size: 2.25rem;
+    font-weight: 700;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid var(--border-color);
+    margin: 0 0 1.5rem 0;
+    text-align: center;
+    transition: all 0.3s ease-in-out;
+
+    /* Light red gradient with a bright highlight */
+    background: linear-gradient(100deg, #e53935 40%, #ffcdd2 50%, #e53935 60%);
+    background-size: 300% 100%;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    
+    animation: reflection-sweep 4s linear infinite;
+
+    /* A red glow */
+    text-shadow: 0 0 15px rgba(239, 83, 80, 0.6);
+}
+
+.main-title:hover {
+    cursor: default;
+    animation-play-state: paused;
+    
+    /* Intensified neon red effect on hover */
+    text-shadow:
+        0 0 7px rgba(255, 138, 128, 0.9),  /* Bright, light red inner glow */
+        0 0 20px rgba(239, 83, 80, 0.9),    /* Main red glow */
+        0 0 40px rgba(211, 47, 47, 0.9);    /* Deeper red outer glow */
+}
+
+@keyframes reflection-sweep {
+    from { background-position: 150% 0; }
+    to { background-position: -150% 0; }
+}

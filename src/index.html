@@ -1,114 +1,136 @@
+<!-- src/index.html -->
 <!DOCTYPE html>
 <html>
 <head>
     <meta charset="UTF-8">
     <title>Password Generator</title>
-    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com;">
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <!-- Title Bar -->
-    <div class="title-bar">
-        <div class="title-bar-text">Password Generator<span id="app-version" class="app-version-text"></span></div>
-        <div class="title-bar-controls">
-            <button id="minimize-btn" class="title-bar-button"><svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M1 6H11" stroke="currentColor" stroke-width="2"/></svg></button>
-            <button id="maximize-btn" class="title-bar-button"><svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="1" y="1" width="10" height="10" stroke="currentColor" stroke-width="2"/></svg></button>
-            <button id="close-btn" class="title-bar-button close-button"><svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M1 1L11 11M1 11L11 1" stroke="currentColor" stroke-width="2"/></svg></button>
+    <div id="loading-screen">
+        <div id="loading-logo">
+            <img class="logo-light-theme" src="assets/xutroncore-light-icon.png" alt="XutronCore Logo">
+            <img class="logo-dark-theme" src="assets/xutroncore-dark-icon.png" alt="XutronCore Logo">
         </div>
     </div>
 
-    <!-- Main Container -->
-    <div class="container">
-        <div class="content-wrapper">
-            <div class="top-controls">
-                <button id="lock-vault-btn" class="control-button" title="Lock/Unlock Vault"></button>
-                <button id="settings-btn" class="control-button" title="Settings">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon"><circle cx="12" cy="12" r="3"></circle><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path></svg>
-                </button>
-                <button id="theme-toggle" class="control-button" title="Toggle Theme">
-                    <span class="icon sun-icon"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg></span>
-                    <span class="icon moon-icon"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg></span>
-                </button>
+    <div class="title-bar">
+        <div class="title-bar-left">
+            <span id="app-version"></span>
+        </div>
+        <div class="title-bar-right">
+            <button id="theme-toggle" title="Toggle dark/light mode">
+                <span class="icon sun-icon"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg></span>
+                <span class="icon moon-icon"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg></span>
+            </button>
+            <div class="window-controls">
+                <button id="minimize-btn" title="Minimize"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line></svg></button>
+                <button id="maximize-btn" title="Maximize"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect></svg></button>
+                <button id="close-btn" title="Close"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg></button>
             </div>
-            
-            <div class="main-form-container">
-                <!-- Left Column -->
-                <div class="form-column" id="generator-column">
-                    <div class="header"><h1>Password Generator</h1></div>
-                    <div class="form-group"><label for="app-name-input">App/Website Name</label><input type="text" id="app-name-input" placeholder="e.g., Google..."></div>
-                    <div class="form-group"><label for="username-input">Username / Email</label><input type="text" id="username-input" placeholder="Your username for this site"></div>
-                    <div class="form-group"><label for="sentence-input">Your Secret Sentence</label><input type="text" id="sentence-input" placeholder="e.g., ILoveTomatoesSoMuch..."></div>
-                    <div class="options-group"><input type="checkbox" id="symbols-checkbox" checked><label for="symbols-checkbox">Include Special Symbols (!@#$...)</label></div>
-                    <button id="generate-btn" class="primary-button">Generate Password</button>
-                    <div class="result-group">
+        </div>
+    </div>
+    
+    <div class="container">
+        <h1 class="main-title">Password Generator</h1>
+        <div class="pg-content-wrapper">
+             <div class="pg-column" id="generator-column">
+                <div class="pg-header">
+                    <h2>Generator</h2>
+                </div>
+                <div class="pg-form-scroll-area">
+                    <div class="pg-form-group"><label for="app-name-input">App/Website Name</label><input type="text" id="app-name-input" placeholder="e.g., Google..."></div>
+                    <div class="pg-form-group"><label for="username-input">Username / Email</label><input type="text" id="username-input" placeholder="Your username for this site"></div>
+                    <div class="pg-form-group"><label for="sentence-input">Your Secret Sentence</label><input type="text" id="sentence-input" placeholder="e.g., ILoveTomatoesSoMuch..."></div>
+                    <div class="pg-options-group"><input type="checkbox" id="symbols-checkbox" checked><label for="symbols-checkbox">Include Special Symbols (!@#$...)</label></div>
+                    <div class="pg-result-group">
                         <label>Generated Password</label>
-                        <div class="password-value-container">
-                            <input type="text" id="password-output" readonly placeholder="Your password will appear here...">
-                            <button id="copy-btn" class="action-btn">Copy</button>
+                        <div class="pg-password-output-container">
+                            <input type="password" id="password-output" readonly placeholder="Your password will appear here...">
+                            <button id="toggle-generated-vis-btn" class="pg-btn">Show</button>
+                            <button id="copy-btn" class="pg-btn">Copy</button>
                         </div>
                     </div>
-                    <p id="error-message" class="error-text"></p>
-                    <button id="save-password-btn" class="secondary-button" style="margin-top: 1rem;">Save to Vault</button>
+                    <p id="error-message" class="pg-error-text"></p>
                 </div>
-                <!-- Right Column -->
-                <div class="form-column" id="vault-column">
-                    <div class="header"><h2>Local Vault</h2></div>
-                    <div class="vault-controls">
-                        <button id="unselect-all-btn" class="action-btn">Select All</button>
-                        <button id="export-selected-btn" class="action-btn">Export All</button>
-                        <button id="delete-selected-btn" class="action-btn delete-btn">Delete All</button>
-                        <button id="import-btn" class="action-btn">Import from File</button>
-                        <button id="pdf-btn" class="action-btn">Make A PDF</button>
+                <div class="pg-form-actions">
+                    <button id="generate-btn" class="pg-btn">Generate Password</button>
+                    <button id="save-password-btn" class="pg-btn pg-btn-secondary">Save to Vault</button>
+                </div>
+            </div>
+
+            <div class="pg-column" id="vault-column">
+                <div class="pg-header">
+                    <h2>Local Vault</h2>
+                    <div class="pg-header-controls">
+                        <button id="lock-vault-btn" class="pg-icon-btn" title="Lock/Unlock Vault"></button>
+                        <button id="settings-btn" class="pg-icon-btn" title="Settings">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon"><circle cx="12" cy="12" r="3"></circle><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path></svg>
+                        </button>
                     </div>
-                    <p id="vault-action-status" class="error-text" style="text-align: center;"></p>
-                    <div class="form-group" style="margin-bottom: 1rem;">
-                        <input type="text" id="search-input" placeholder="Search vault...">
-                    </div>
-                    <div id="saved-passwords-list" class="saved-passwords-container"></div>
+                </div>
+                <div class="vault-controls">
+                    <button id="unselect-all-btn" class="pg-btn">Select All</button>
+                    <button id="export-selected-btn" class="pg-btn">Export All</button>
+                    <button id="delete-selected-btn" class="pg-btn pg-btn-danger">Delete All</button>
+                    <button id="import-btn" class="pg-btn">Import</button>
+                    <button id="pdf-btn" class="pg-btn">Make PDF</button>
+                </div>
+                <p id="vault-action-status" class="pg-error-text"></p>
+                <div class="pg-form-group">
+                    <input type="text" id="search-input" placeholder="Search vault...">
+                </div>
+                <div id="saved-passwords-list" class="saved-passwords-container">
                 </div>
             </div>
         </div>
     </div>
+    
+    <footer>
+        <p>Copyright © <span id="copyright-year"></span> Xutron</p>
+    </footer>
 
-    <!-- Modals -->
     <div id="popup-overlay" class="popup-overlay" style="display: none;">
         <div class="popup-modal">
             <button id="popup-close-btn" class="modal-close-btn">×</button>
             <h3>Success!</h3>
             <p>Your file has been exported successfully.</p>
             <div class="popup-actions">
-                <button id="popup-show-btn" class="primary-button">Show in Folder</button>
+                <button id="popup-show-btn" class="pg-btn pg-btn-secondary">Show in Folder</button>
             </div>
         </div>
     </div>
     
-    <!-- Generic Prompt Modal -->
     <div id="prompt-overlay" class="popup-overlay" style="display: none;">
         <div class="popup-modal">
+            <!-- MODIFIED: Added a close button to the prompt -->
+            <button id="prompt-close-btn" class="modal-close-btn">×</button>
             <h3 id="prompt-title">Prompt Title</h3>
             <p id="prompt-message">Prompt message.</p>
-            <div class="form-group">
+            <div class="pg-form-group">
                 <input type="password" id="prompt-input" placeholder="Enter value...">
             </div>
-            <p id="prompt-error-message" class="error-text" style="margin-top: 1rem;"></p>
-            <div class="popup-actions" style="margin-top: 1.5rem;">
-                <button id="prompt-cancel-btn" class="secondary-button">Cancel</button>
-                <button id="prompt-confirm-btn" class="primary-button">Confirm</button>
+            <p id="prompt-error-message" class="pg-error-text" style="margin-top: 1rem;"></p>
+            <div class="popup-actions">
+                <button id="prompt-cancel-btn" class="pg-btn">Cancel</button>
+                <button id="prompt-confirm-btn" class="pg-btn pg-btn-secondary">Confirm</button>
             </div>
         </div>
     </div>
 
-    <!-- Settings Modal -->
     <div id="settings-modal-overlay" class="popup-overlay" style="display: none;">
         <div class="popup-modal">
             <button id="settings-close-btn" class="modal-close-btn">×</button>
             <h3>Settings</h3>
             <p>Change your master password. Requires the vault to be unlocked.</p>
-            <div class="form-group"><label>Old Password</label><input type="password" id="old-password-input"></div>
-            <div class="form-group"><label>New Password (min. 6 chars)</label><input type="password" id="new-password-input"></div>
-            <div class="form-group"><label>Confirm New Password</label><input type="password" id="confirm-new-password-input"></div>
-            <button id="change-password-btn" class="primary-button">Save Changes</button>
-            <p id="settings-error-message" class="error-text"></p>
+            <div class="pg-form-group"><label>Old Password</label><input type="password" id="old-password-input"></div>
+            <div class="pg-form-group"><label>New Password (min. 6 chars)</label><input type="password" id="new-password-input"></div>
+            <div class="pg-form-group"><label>Confirm New Password</label><input type="password" id="confirm-new-password-input"></div>
+            <div class="popup-actions">
+                <button id="change-password-btn" class="pg-btn pg-btn-secondary">Save Changes</button>
+            </div>
+            <p id="settings-error-message" class="pg-error-text"></p>
         </div>
     </div>
     

@@ -1,7 +1,10 @@
+// src/js/rendering/modals.js
+
 // This function handles the generic prompt used for unlock, export, etc.
 export function customPrompt(elements, { title, message, errorMessage = '' }) {
     return new Promise((resolve) => {
-        const { promptOverlay, promptTitle, promptMessage, promptInput, promptConfirmBtn, promptCancelBtn, promptError } = elements;
+        // MODIFIED: Destructuring the new close button element
+        const { promptOverlay, promptTitle, promptMessage, promptInput, promptConfirmBtn, promptCancelBtn, promptCloseBtn, promptError } = elements;
         
         promptTitle.textContent = title;
         promptMessage.textContent = message;
@@ -17,6 +20,8 @@ export function customPrompt(elements, { title, message, errorMessage = '' }) {
         const closePrompt = (value) => {
             promptConfirmBtn.onclick = null;
             promptCancelBtn.onclick = null;
+            // MODIFIED: Clear the new close button's listener
+            promptCloseBtn.onclick = null;
             promptInput.onkeyup = null;
             promptOverlay.onclick = null;
             
@@ -28,6 +33,8 @@ export function customPrompt(elements, { title, message, errorMessage = '' }) {
 
         promptConfirmBtn.onclick = () => closePrompt(promptInput.value);
         promptCancelBtn.onclick = () => closePrompt(null);
+        // MODIFIED: Added a listener for the new close button
+        promptCloseBtn.onclick = () => closePrompt(null);
         promptInput.onkeyup = (e) => {
             if (e.key === 'Enter') closePrompt(promptInput.value);
             if (e.key === 'Escape') closePrompt(null);

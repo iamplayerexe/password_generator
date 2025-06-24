@@ -1,3 +1,4 @@
+// src/js/main/window-manager.js
 const { BrowserWindow } = require('electron');
 const path = require('path');
 const { APP_DIMENSIONS, APP_ROOT_PATH } = require('./constants');
@@ -11,14 +12,13 @@ function createMainWindow() {
         frame: false,
         webPreferences: {
             preload: path.join(APP_ROOT_PATH, 'preload.js'),
-            // RESTORING SECURE DEFAULTS that work with contextBridge
             contextIsolation: true,
             nodeIntegration: false,
             enableRemoteModule: false,
         }
     });
 
-    // Listen for state changes and forward them to the renderer
+    // MODIFIED: These listeners are added to correctly report the window state.
     mainWindow.on('maximize', () => mainWindow.webContents.send('window-state-changed', true));
     mainWindow.on('unmaximize', () => mainWindow.webContents.send('window-state-changed', false));
     

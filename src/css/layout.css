@@ -1,99 +1,80 @@
-/*
- * =========================================
- * Main Layout & Content
- * =========================================
- */
-.container {
-    flex-grow: 1;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    /* Default padding for the maximized "island" view */
-    padding: 2rem;
-    transition: padding 0.2s ease-in-out;
-}
-
-/*
- * Default styles define the MAXIMIZED view.
- * It's a fixed-size container in the middle of the screen.
- */
-.content-wrapper {
-    width: 100%;
-    max-width: 950px;
-    height: 706px;
-    background: var(--bg-secondary);
-    padding: 2rem;
-    border-radius: 15px;
-    box-shadow: var(--shadow-md);
-    position: relative;
+/* src/css/layout.css */
+.container { 
+    padding: 30px; 
+    flex-grow: 1; 
+    overflow: hidden; 
     display: flex;
     flex-direction: column;
-    transition: all 0.2s ease-in-out;
+    min-height: 0;
 }
 
-/*
- * When the app is NOT MAXIMIZED, we activate windowed-mode.
- * These rules remove the container look and make it fill the screen.
- */
-body.windowed-mode .container {
-    padding: 0;
-}
-body.windowed-mode .content-wrapper {
-    max-width: none;
-    height: calc(100vh - 32px); /* Fill height minus title bar */
-    border-radius: 0;
-    box-shadow: none;
-}
-
-.header {
-    text-align: center;
-    margin-bottom: 2rem;
+footer {
+    width: 100%; 
+    text-align: center; 
+    padding: 1rem;
+    box-shadow: 0 -5px 15px -3px var(--shadow-color);
+    font-size: 0.8rem;
+    color: var(--subtitle-color); 
     flex-shrink: 0;
-}
-#vault-column .header {
-    margin-top: 1.5rem; /* Lowers the vault section */
-}
-.header h1, .header h2 {
-    margin-bottom: 0.5rem;
+    z-index: 10;
+    position: relative;
 }
 
-.main-form-container {
-    display: flex;
-    gap: 3rem;
+.pg-content-wrapper {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
     flex-grow: 1;
     min-height: 0;
 }
 
-.form-column {
-    flex: 1;
-    min-width: 0;
+.pg-column {
+    background-color: var(--card-bg-color);
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    padding: 1.5rem;
     display: flex;
     flex-direction: column;
+    box-shadow: 0 4px 10px -2px var(--shadow-color);
+    overflow: hidden;
 }
 
-.vault-controls {
+.pg-header {
+    display: flex;
+    /* MODIFIED: Changed to center for title, buttons will be on the right */
+    justify-content: center; 
+    align-items: center;
+    margin-bottom: 1.5rem;
+    border-bottom: 1px solid var(--border-color);
+    padding-bottom: 1rem;
+    flex-shrink: 0;
+    position: relative; /* For absolute positioning of controls */
+}
+
+.pg-header h2 {
+    margin: 0;
+    font-size: 1.5rem;
+}
+
+/* MODIFIED: New group for vault header buttons */
+.pg-header-controls {
+    position: absolute;
+    right: 0;
     display: flex;
     gap: 0.5rem;
-    flex-wrap: wrap;
-    margin-bottom: 0.5rem;
-    flex-shrink: 0;
 }
 
-.saved-passwords-container {
+/* MODIFIED: New scrollable area for the generator form */
+.pg-form-scroll-area {
     flex-grow: 1;
     overflow-y: auto;
-    padding: 1rem;
-    border: 2px dashed transparent;
-    border-radius: 8px;
-    transition: border-color 0.3s ease;
+    min-height: 0;
+    padding-right: 0.5rem; /* Space for scrollbar */
+    margin-right: -0.5rem; /* Counteract padding to keep content aligned */
 }
 
-.saved-passwords-container.drag-over {
-    border-color: var(--accent-primary);
-}
-
-/* Custom Scrollbar */
-.saved-passwords-container::-webkit-scrollbar { width: 10px; }
-.saved-passwords-container::-webkit-scrollbar-track { background: var(--bg-primary); border-radius: 5px; }
-.saved-passwords-container::-webkit-scrollbar-thumb { background-color: var(--copy-btn-bg); border-radius: 5px; border: 2px solid var(--bg-primary); }
-.saved-passwords-container::-webkit-scrollbar-thumb:hover { background-color: var(--copy-btn-hover); }
+/* MODIFIED: Custom scrollbar for the new scroll area */
+.pg-form-scroll-area::-webkit-scrollbar { width: 8px; }
+.pg-form-scroll-area::-webkit-scrollbar-track { background: transparent; }
+.pg-form-scroll-area::-webkit-scrollbar-thumb { background-color: var(--border-color); border-radius: 4px; }
+.pg-form-scroll-area::-webkit-scrollbar-thumb:hover { background-color: var(--subtitle-color); }

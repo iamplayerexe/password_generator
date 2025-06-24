@@ -1,0 +1,82 @@
+/* src/css/buttons.css */
+.pg-btn, .pg-icon-btn {
+    padding: 0.6rem 1rem; 
+    border: 1px solid var(--border-color); 
+    border-radius: 6px;
+    cursor: pointer; 
+    font-weight: 600; 
+    font-size: 0.875rem; 
+    transition: all 0.2s ease;
+    background-color: var(--card-bg-color); 
+    color: var(--text-color);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.pg-btn:hover:not(:disabled) {
+    border-color: var(--accent-color); 
+    color: var(--accent-color);
+}
+.pg-btn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+#generate-btn {
+    color: var(--purple-text-color);
+    border-color: var(--purple-text-color);
+}
+#generate-btn:hover:not(:disabled) {
+    background-color: var(--purple-text-color);
+    color: white;
+}
+
+.pg-btn-secondary {
+    background-color: var(--accent-color);
+    border-color: var(--accent-color);
+    color: white;
+}
+.pg-btn-secondary:hover:not(:disabled) {
+    background-color: #4338ca;
+    border-color: #4338ca;
+    color: white;
+}
+
+.pg-btn-danger {
+    color: var(--danger-color);
+    border-color: var(--danger-color);
+}
+.pg-btn-danger:hover:not(:disabled) {
+    background-color: var(--danger-color);
+    color: white;
+}
+
+.vault-controls {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-bottom: 1rem;
+}
+
+.pg-icon-btn {
+    padding: 0.5rem;
+    width: 36px;
+    height: 36px;
+}
+.pg-icon-btn svg {
+    stroke: var(--subtitle-color);
+    transition: stroke 0.2s ease;
+}
+.pg-icon-btn:hover svg {
+    stroke: var(--accent-color);
+}
+
+.pg-form-actions {
+    margin-top: auto; /* Pushes buttons to the bottom */
+    padding-top: 1rem; /* Adds space above */
+    display: flex;
+    gap: 1rem;
+}
+.pg-form-actions > .pg-btn {
+    flex: 1; /* Makes buttons share space equally */
+}
