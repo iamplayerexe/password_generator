@@ -1,6 +1,6 @@
 {
   "name": "password-generator",
-  "version": "1.2.0",
+  "version": "1.2.1",
   "description": "A password generator app built with Electron.",
   "main": "main.js",
   "scripts": {
